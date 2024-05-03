@@ -1,64 +1,146 @@
 <template>
   <div class="background">
+    <!-- Counter 0 - Select Team -->
     <div class="modal" v-if="counter === 0">
       <div class="modal-dialog" role="document">
         <div class="modal-content custom-modal">
           <div class="modal-header">
-            <h5 class="modal-title">Enter Your Name</h5>
+            <h5 class="modal-title">Select Your Team</h5>
           </div>
           <div class="modal-body">
-            <input type="text" class="form-control full-width" placeholder="Bataiye sharmaye nahi" v-model="userName">
+            <select class="form-control full-width" v-model="selectedTeam">
+              <option value="">Select Team</option>
+              <option value="DevEmpire">DevEmpire</option>
+              <option value="Mevricks">Mevricks</option>
+              <!-- Add more options as needed -->
+            </select>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="nameSubmit">Let's Go</button>
+            <button type="button" class="btn btn-primary" @click="teamSubmit">Let's Go</button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Counter 1 - Enter Password -->
     <div v-if="counter === 1" class="center-content text-center">
-      <h4>Sacchi mea apka naam {{ userName }} hai?</h4>
-      <img src="../are-you-sure.png" alt="Photu load nahi hua, Network sudharo" class="img-thumbnail transparent-bg">
-      <button type="button" class="btn btn-warning full-width-button" @click="backToName">Batata Hu saccha naam, juth kyu hi bolna</button>
-      <button type="button" class="btn btn-success full-width-button" @click="NextFromValidation">Ha Ha Sacchi</button>
-    </div>
-
-    <div v-if="counter === 2" class="center-content text-center">
-      <div class="welcome-text">
-        <h4 class="mb-4">Accha Chalo, We are good people so maan lete hai ki apka naam <strong>{{ userName }}</strong> hai &#128524; !!</h4>
-        <h2 class="mb-5">Welcome {{ userName }} &#128513;</h2>
+      <h4>{{ selectedTeam }} - Enter Password</h4>
+      <div class="form-group">
+        <input type="password" class="form-control" v-model="password" placeholder="Password">
       </div>
-
-      <NuxtLink to="/padhariye"><button type="button" class="btn btn-next">Next -></button></NuxtLink>
-      <p class="mt-4">Won't take your much precious time, but abhi jaldi next dabado</p>
+      <button type="button" class="btn btn-primary" @click="validatePassword">Submit</button>
     </div>
+
+    <!-- Counter 2 - Success/Failure -->
+    <div v-if="counter === 2" class="center-content text-center">
+      <div v-if="!success">
+      <h4>Password is incorrect. Please try again.</h4>
+      <button type="button" class="btn btn-next" @click="proceed">Try Again</button>
+      </div>
+    </div>
+<!-- Quiz Content -->
+<div v-if="success" class="quiz-container">
+  <h1><u>Welcome {{ selectedTeam }}</u></h1>
+  <h4>Let's Go on a Quiz about our Improvised Family</h4>
+  <ol>
+    <li>When was our company established?</li>
+    <ul>
+      <li><input type="radio" id="q1a" name="q1" value="a"> <label for="q1a">2001</label></li>
+      <li><input type="radio" id="q1b" name="q1" value="b"> <label for="q1b">2011</label></li>
+      <li><input type="radio" id="q1c" name="q1" value="c"> <label for="q1c">2013</label></li>
+      <li><input type="radio" id="q1d" name="q1" value="d"> <label for="q1d">2009</label></li>
+    </ul>
+    <li>Date when the company was established?</li>
+    <ul>
+      <li><input type="radio" id="q2a" name="q2" value="a"> <label for="q2a">19</label></li>
+      <li><input type="radio" id="q2b" name="q2" value="b"> <label for="q2b">18</label></li>
+      <li><input type="radio" id="q2c" name="q2" value="c"> <label for="q2c">23</label></li>
+      <li><input type="radio" id="q2d" name="q2" value="d"> <label for="q2d">19</label></li>
+    </ul>
+    <li>In which month?</li>
+    <ul>
+      <li><input type="radio" id="q3a" name="q3" value="a"> <label for="q3a">Jan</label></li>
+      <li><input type="radio" id="q3b" name="q3" value="b"> <label for="q3b">Feb</label></li>
+      <li><input type="radio" id="q3c" name="q3" value="c"> <label for="q3c">May</label></li>
+      <li><input type="radio" id="q3d" name="q3" value="d"> <label for="q3d">Dec</label></li>
+    </ul>
+  </ol>
+
+  <div v-if="rightANS">
+   <nuxt-link to="padhariye">But Why did you asked that!?</nuxt-link>
+  </div>
+
+  <!-- Submit Button -->
+  <button type="button" class="btn btn-primary" @click="submitQuiz">Submit</button>
 </div>
+
+      
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
 const counter = ref(0);
-const userName = ref('');
-const savedUserName = ref('');
+const selectedTeam = ref('');
+const password = ref('');
+const success = ref(false);
+const rightANS = ref(false);
 
-const nameSubmit = () => {
-  if (userName.value === '') {
-    alert("Arey naam toa batao");
+const teamSubmit = () => {
+  if (selectedTeam.value === '') {
+    alert("Please select your team");
     return;
   }
-  savedUserName.value = userName.value;
-  localStorage.setItem('savedUserName', savedUserName.value);
   counter.value++;
 };
 
-const backToName = () => {
-  userName.value = ""
-  counter.value--
-}
+const validatePassword = () => {
+  // Static passwords for teams (you can change these as needed)
+  const passwords = {
+    DevEmpire: 'dev123',
+    Mevricks: 'mev456'
+    // Add more teams and passwords as needed
+  };
 
-const NextFromValidation = () => {
-  counter.value++
-}
+  if (password.value === passwords[selectedTeam.value]) {
+    success.value = true;
+  }
+  counter.value++;
+};
+
+const proceed = () => {
+  if (success.value) {
+    // Proceed to the next step
+    // You can navigate to another route or perform other actions here
+    console.log("Proceeding to the next step");
+  } else {
+    // Reset counter and fields for retry
+    counter.value = 1;
+    password.value = '';
+  }
+};
+
+const submitQuiz = () => {
+  // Get the selected answers
+  const answer1 = document.querySelector('input[name="q1"]:checked')?.value;
+  const answer2 = document.querySelector('input[name="q2"]:checked')?.value;
+  const answer3 = document.querySelector('input[name="q3"]:checked')?.value;
+  
+  // Check if the answers are correct
+  if (answer1 === 'b' && answer2 === 'b' && answer3 === 'c') {
+    // Correct answers
+    alert('CORRECT');
+    rightANS.value = true
+    // Redirect to 'padhariye.vue' using nuxt-link
+    // Example: window.location.href = '/padhariye.vue';
+  } else {
+    // Incorrect answers
+    alert('Wrong answers. Please try again.');
+    // Stay on the same page
+  }
+};
+
 </script>
 
 <style>

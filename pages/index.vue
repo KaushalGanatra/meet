@@ -14,7 +14,7 @@
               <option value="Mevricks">Mevrick</option>
               <option value="Technocrats">Technocrats</option>
               <option value="Phoenix">Phoenix</option>
-              <option value="Rakshit and Shailesh Team">Rakshit and Shailesh Team</option>
+              <option value="Dignities">Dignities</option>
               <option value="HR">HR</option>
               <option value="Managment">Managment</option>
               <!-- Add more options as needed -->
@@ -103,13 +103,13 @@ const teamSubmit = () => {
 const validatePassword = () => {
   // Static passwords for teams (you can change these as needed)
 const passwords = {
-  DevEmpire: 'dev123', // Password for DevEmpire
-  Mevricks: 'mev456', // Password for Mevricks
-  Technocrats: 'tech789', // Password for Technocrats
-  Phoenix: 'phnx@2024', // Password for Phoenix
-  "Rakshit and Shailesh Team": 'rs@2024', // Password for Rakshit and Shailesh Team
-  HR: 'hr@2024', // Password for HR
-  Management: 'mgmt@2024', // Password for Management
+  DevEmpire: 'CodeKingdom123', // Password for DevEmpire
+  Mevricks: 'Innovate456', // Password for Mevricks
+  Technocrats: 'TechGenius789', // Password for Technocrats
+  Phoenix: 'RiseFromAshes2024', // Password for Phoenix
+  Dignities: 'Integrity@2024', // Password for Dignities
+  HR: 'PeopleFirst@2024', // Password for HR
+  Management: 'LeadershipMgmt2024', // Password for Management
 }
 
   if (password.value === passwords[selectedTeam.value]) {

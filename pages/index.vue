@@ -11,7 +11,12 @@
             <select class="form-control full-width" v-model="selectedTeam">
               <option value="">Select Team</option>
               <option value="DevEmpire">DevEmpire</option>
-              <option value="Mevricks">Mevricks</option>
+              <option value="Mevricks">Mevrick</option>
+              <option value="Technocrats">Technocrats</option>
+              <option value="Phoenix">Phoenix</option>
+              <option value="Rakshit and Shailesh Team">Rakshit and Shailesh Team</option>
+              <option value="HR">HR</option>
+              <option value="Managment">Managment</option>
               <!-- Add more options as needed -->
             </select>
           </div>
@@ -41,7 +46,7 @@
 <!-- Quiz Content -->
 <div v-if="success" class="quiz-container">
   <h1><u>Welcome {{ selectedTeam }}</u></h1>
-  <h4>Let's Go on a Quiz about our Improvised Family</h4>
+  <h4>Let's Go on a Quiz about our Improwised Family</h4>
   <ol>
     <li>When was our company established?</li>
     <ul>
@@ -67,7 +72,7 @@
   </ol>
 
   <div v-if="rightANS">
-   <nuxt-link to="padhariye">But Why did you asked that!?</nuxt-link>
+   <p>But Why did you asked that!?</p>  <NuxtLink to="/padhariye"> Click to know </NuxtLink>
   </div>
 
   <!-- Submit Button -->
@@ -97,11 +102,15 @@ const teamSubmit = () => {
 
 const validatePassword = () => {
   // Static passwords for teams (you can change these as needed)
-  const passwords = {
-    DevEmpire: 'dev123',
-    Mevricks: 'mev456'
-    // Add more teams and passwords as needed
-  };
+const passwords = {
+  DevEmpire: 'dev123', // Password for DevEmpire
+  Mevricks: 'mev456', // Password for Mevricks
+  Technocrats: 'tech789', // Password for Technocrats
+  Phoenix: 'phnx@2024', // Password for Phoenix
+  "Rakshit and Shailesh Team": 'rs@2024', // Password for Rakshit and Shailesh Team
+  HR: 'hr@2024', // Password for HR
+  Management: 'mgmt@2024', // Password for Management
+}
 
   if (password.value === passwords[selectedTeam.value]) {
     success.value = true;

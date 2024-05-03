@@ -72,7 +72,7 @@
   </ol>
 
   <div v-if="rightANS">
-   <p>But Why did you asked that!?</p>  <NuxtLink to="/padhariye"> Click to know </NuxtLink>
+   <p>But Why did you asked that!?</p>  <NuxtLink to="/padhariye" style="color: black;"> <u>Click to know</u> </NuxtLink>
   </div>
 
   <!-- Submit Button -->

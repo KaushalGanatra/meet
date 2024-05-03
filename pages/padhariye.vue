@@ -18,6 +18,10 @@
       <source src="background_music.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
+
+    <div>
+    <u><NuxtLink to="/last" style="color: black;"> NEXT -> </NuxtLink></u>
+    </div>
   </div>
 </template>
 

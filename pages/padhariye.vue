@@ -1,6 +1,6 @@
 <template>
   <div class="background">
-    <h1>Hey Improwised Family!!</h1>
+    <h1><u>Hey Improwised Family!!</u></h1>
     <br>
     <p>Get ready to break out the party hats and join us in celebrating a monumental moment in our company's journey! Guess what? We're about to hit a major milestone that's making us feel like we're on cloud nine! 
       That's right, we're not just turning 13 - we're hitting the glorious tween years of our corporate existence. And just like any tween, we're ready to celebrate in style!</p>
@@ -20,12 +20,23 @@
     </audio>
 
     <div>
-    <u><NuxtLink to="/last" style="color: black;"> NEXT -> </NuxtLink></u>
+    <u><a href="https://docs.google.com/forms/d/e/1FAIpQLSfTvu0-ACJsjxROpzrowUqLPcekR5xVoiiyNPJQD29YPEJszw/viewform" style="color: black;"> NEXT -> </a></u>
     </div>
   </div>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  // Check if it's the first time loading the page
+  if (!localStorage.getItem('loadedBefore')) {
+    // Set a flag indicating that the page has been loaded before
+    localStorage.setItem('loadedBefore', true);
+    // Reload the page
+    location.reload();
+  }
+});
 </script>
 
 <style>
